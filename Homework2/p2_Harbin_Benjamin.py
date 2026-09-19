@@ -3,7 +3,7 @@ def line_number(file1,file2):
         with open(file1, "r") as f:
             with open(file2, "w") as f2:
                 for i, line in enumerate(f):
-                    f2.write(f"{i+1} {line}")
+                    f2.write(f"{i+1}. {line}")
 
     except FileNotFoundError:
         print(f"Could not find a file")
