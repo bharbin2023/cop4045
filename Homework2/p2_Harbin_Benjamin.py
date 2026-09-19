@@ -17,12 +17,35 @@ def lowerTuple(list):
             newList.append((i.lower(), len(i)))
     return newList
 
+#part c functions
+def getFirstMidLast(name):
+    name = name.split(" ")
+    return name
+def MiddleInitial(midInitial):
+    midInitial = midInitial[0] + '.'
+    return midInitial
+def newNameFormat(nameList):
+    newName = " ".join(nameList)
+    return newName
 #a
-print(abEqcd())
+#print(abEqcd())
 
 #b
+'''
 list = ['One', 'SEVEN', 'three', 'two', 'Ten']
 list = lowerTuple(list)
 print(list)
-
+'''
 #c
+nameList = []
+newNameFormatList = []
+n = int(input("How many names do you want to enter? "))
+for i in range(n):
+    name = input("\nEnter a first, middle, and last name: ")
+    nameList.append(name)
+
+for i in nameList:
+    i = getFirstMidLast(i)
+    i[1]= MiddleInitial(i[1])
+    newNameFormatList.append(newNameFormat(i))
+print(newNameFormatList)
