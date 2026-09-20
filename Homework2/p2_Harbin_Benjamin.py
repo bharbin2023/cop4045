@@ -44,10 +44,19 @@ def compareLetters(str1, str2):
 def createTuple(str1, str2):
     newTuple = (i,j)
     return newTuple
+
 #e
 def wordAndLength(wordList, dict):
     for word in wordList:
         dict[word] = len(word)
+
+#f
+def findVowels(text, vowels, locations):
+    i = 0
+    while i < len(text):
+        if text[i].lower() in vowels:
+            locations[i] = text[i].lower()
+        i+=1
 #a
 #print(abEqcd())
 
@@ -86,9 +95,17 @@ for i in lst1:
             #compare i and j characters
 print(aTuple)
 '''
+'''
 #e
 dict = {}
 s = ["one", "two", "three"]
 wordAndLength(s, dict)
 print(dict)
+'''
 
+#f
+text = "Hello World"
+whereVowels = {}
+vowels = ['a','e','i','o','u']
+findVowels(text, vowels, whereVowels)
+print(whereVowels)
