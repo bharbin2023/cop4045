@@ -58,16 +58,16 @@ def findVowels(text, vowels, locations):
             locations[i] = text[i].lower()
         i+=1
 #a
-#print(abEqcd())
+print(abEqcd())
 
 #b
-'''
+
 list = ['One', 'SEVEN', 'three', 'two', 'Ten']
 list = lowerTuple(list)
 print(list)
-'''
+
 #c
-'''
+
 nameList = []
 newNameFormatList = []
 n = int(input("How many names do you want to enter? "))
@@ -80,10 +80,10 @@ for i in nameList:
     i[1]= MiddleInitial(i[1])
     newNameFormatList.append(newNameFormat(i))
 print(newNameFormatList)
-'''
+
 
 #d
-'''
+
 lst1 =  ["Spam", "Trams", "Elbows", "Tops", "Astral"]
 lst2 =["Bowels", "Sample", "Altars", "Stop", "Course", "Smart"] 
 aTuple = ()
@@ -94,14 +94,14 @@ for i in lst1:
 
             #compare i and j characters
 print(aTuple)
-'''
-'''
+
+
 #e
 dict = {}
 s = ["one", "two", "three"]
 wordAndLength(s, dict)
 print(dict)
-'''
+
 
 #f
 text = "Hello World"
