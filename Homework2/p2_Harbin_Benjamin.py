@@ -27,6 +27,24 @@ def MiddleInitial(midInitial):
 def newNameFormat(nameList):
     newName = " ".join(nameList)
     return newName
+
+#d
+def lettersInWord(s):
+    freq = {}
+    for letter in s.lower():
+        freq[letter] = freq.get(letter, 0) + 1
+    return freq
+def compareLetters(str1, str2):
+    w1 = lettersInWord(str1)
+    w2 = lettersInWord(str2)
+    if w1 == w2:
+        return True
+    return False
+
+def createTuple(str1, str2):
+    newTuple = (i,j)
+    return newTuple
+
 #a
 #print(abEqcd())
 
@@ -37,6 +55,7 @@ list = lowerTuple(list)
 print(list)
 '''
 #c
+'''
 nameList = []
 newNameFormatList = []
 n = int(input("How many names do you want to enter? "))
@@ -49,3 +68,16 @@ for i in nameList:
     i[1]= MiddleInitial(i[1])
     newNameFormatList.append(newNameFormat(i))
 print(newNameFormatList)
+'''
+
+#d
+lst1 =  ["Spam", "Trams", "Elbows", "Tops", "Astral"]
+lst2 =["Bowels", "Sample", "Altars", "Stop", "Course", "Smart"] 
+aTuple = ()
+for i in lst1:
+    for j in lst2:
+        if len(i) == len(j) and compareLetters(i,j):
+           aTuple += (createTuple(i,j),)
+
+            #compare i and j characters
+print(aTuple)
