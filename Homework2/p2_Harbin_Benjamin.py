@@ -44,7 +44,10 @@ def compareLetters(str1, str2):
 def createTuple(str1, str2):
     newTuple = (i,j)
     return newTuple
-
+#e
+def wordAndLength(wordList, dict):
+    for word in wordList:
+        dict[word] = len(word)
 #a
 #print(abEqcd())
 
@@ -71,6 +74,7 @@ print(newNameFormatList)
 '''
 
 #d
+'''
 lst1 =  ["Spam", "Trams", "Elbows", "Tops", "Astral"]
 lst2 =["Bowels", "Sample", "Altars", "Stop", "Course", "Smart"] 
 aTuple = ()
@@ -81,3 +85,10 @@ for i in lst1:
 
             #compare i and j characters
 print(aTuple)
+'''
+#e
+dict = {}
+s = ["one", "two", "three"]
+wordAndLength(s, dict)
+print(dict)
+
