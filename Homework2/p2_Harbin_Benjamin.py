@@ -1,5 +1,5 @@
 #part a function(s)
-def abEqcd():
+def abEqcd()->tuple:
     abcdList =[]
     for a in range(1, 11):
         for b in range(1, 11):
@@ -10,45 +10,42 @@ def abEqcd():
     return tuple(abcdList)
 
 #part b functions
-def lowerTuple(list):
+def lowerTuple(words: list[str])->list[tuple[str,int]]:
     newList = []
-    for i in list:
+    for i in words:
         if len(i) < 5:
             newList.append((i.lower(), len(i)))
     return newList
 
 #part c functions
-def getFirstMidLast(name):
-    name = name.split(" ")
-    return name
-def MiddleInitial(midInitial):
+def getFirstMidLast(name:str)->list[str]:
+    ListofName = name.split(" ")
+    return ListofName
+def MiddleInitial(midInitial:str)->str:
     midInitial = midInitial[0] + '.'
     return midInitial
-def newNameFormat(nameList):
+def newNameFormat(nameList:list[str])->str:
     newName = " ".join(nameList)
     return newName
 
 #d
-def lettersInWord(s):
+def lettersInWord(s:str)->dict[str,int]:
     freq = {}
     for letter in s.lower():
         freq[letter] = freq.get(letter, 0) + 1
     return freq
-def compareLetters(str1, str2):
+def compareLetters(str1:str, str2:str)->bool:
     w1 = lettersInWord(str1)
     w2 = lettersInWord(str2)
     if w1 == w2:
         return True
     return False
 
-def createTuple(str1, str2):
-    newTuple = (i,j)
-    return newTuple
 
 #e
-def wordAndLength(wordList, dict):
+def wordAndLength(wordList:list[str], wordDict: dict[str,int]):
     for word in wordList:
-        dict[word] = len(word)
+        wordDict[word] = len(word)
 
 #f
 def findVowels(text, vowels, locations):
@@ -62,9 +59,9 @@ print(abEqcd())
 
 #b
 
-list = ['One', 'SEVEN', 'three', 'two', 'Ten']
-list = lowerTuple(list)
-print(list)
+wordList = ['One', 'SEVEN', 'three', 'two', 'Ten']
+wordList = lowerTuple(wordList)
+print(wordList)
 
 #c
 
@@ -90,17 +87,17 @@ aTuple = ()
 for i in lst1:
     for j in lst2:
         if len(i) == len(j) and compareLetters(i,j):
-           aTuple += (createTuple(i,j),)
+           aTuple += ((i,j),)
 
             #compare i and j characters
 print(aTuple)
 
 
 #e
-dict = {}
+wordDict = {}
 s = ["one", "two", "three"]
-wordAndLength(s, dict)
-print(dict)
+wordAndLength(s, wordDict)
+print(wordDict)
 
 
 #f
