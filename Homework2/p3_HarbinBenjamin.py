@@ -49,25 +49,20 @@ def load_network(filename):
             for line in f:
                 userInfo = line.strip().split(",")
                 userFriends = userInfo[2:]
-                print()
-                add_user(sn, userInfo[0],userInfo[1])
-                for friend in userFriends:
-                    add_friend(sn, userInfo[0], friend)
+                add_user(sn, userInfo[0],userInfo[1])#First and second item are always user, fullname
+                for friend in userFriends:#mutual friendship is needed;
+                    add_friend(sn, userInfo[0], friend)#will friend with the other account is created
+        return sn
 
+def main():
+    sn = load_network("network.csv")
+    newFull = input("Enter your full name: ")
+    newUser = input("Enter your username: ")
+    add_user(sn, newUser, newFull)
+    newFriend = input("Enter the username of someone you would like to friend: ")
+    add_friend(sn, newUser, newFriend)
+    print(get_friends(sn, "maria", 2))
+    save_network("network.csv", sn)
 
-
-sn = {'alice': ('Alice Smith', ['maria']),
-      'maria': ('Maria Cortez', ['alice', 'joe', 'david']),
-      'joe': ('Joseph Adams', ['maria', 'eve']),
-      'eve': ('Evelyn Cooper', ['joe']),
-      'david': ('David Benson', ['maria'])}
-
-'''for i in range(2):
-    name = input("Enter your name: ")
-    username = input("Enter your username: ")
-    add_user(sn, username, name)
-print(sn)'''
-
-#print(get_friends(sn,"alice", 1))
-save_network("network.csv", sn)
-load_network("network.csv")
+if __name__ == "__main__":
+    main()
