@@ -43,6 +43,16 @@ def save_network(filename, sn):
                 userInfo.append(friend)
             userInfo = ",".join(userInfo)
             f.write(userInfo + "\n")
+def load_network(filename):
+        sn = {}
+        with open(filename, "r") as f:
+            for line in f:
+                userInfo = line.strip().split(",")
+                userFriends = userInfo[2:]
+                print()
+                add_user(sn, userInfo[0],userInfo[1])
+                for friend in userFriends:
+                    add_friend(sn, userInfo[0], friend)
 
 
 
@@ -58,5 +68,6 @@ sn = {'alice': ('Alice Smith', ['maria']),
     add_user(sn, username, name)
 print(sn)'''
 
-print(get_friends(sn,"alice", 1))
+#print(get_friends(sn,"alice", 1))
 save_network("network.csv", sn)
+load_network("network.csv")
