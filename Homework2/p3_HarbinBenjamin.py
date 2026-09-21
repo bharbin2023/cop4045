@@ -34,7 +34,7 @@ def get_friends(sn, user1, distance):
         print("User does not exist")
         raise KeyError
 def save_network(filename, sn):
-    witWh open(filename, "w") as f:
+    with open(filename, "w") as f:
         for user in sn:
             userInfo = []
             userInfo.append(user)
