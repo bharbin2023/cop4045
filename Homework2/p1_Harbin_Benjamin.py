@@ -1,5 +1,5 @@
 
-def line_number(file1,file2):
+def line_number(file1:str,file2:str)->None:
     try:
         with open(file1, "r") as f:
             with open(file2, "w") as f2:
@@ -12,12 +12,12 @@ def line_number(file1,file2):
         print(f"Could not find a file")
         raise FileNotFoundError
 
-def parse_functions(file):  
+def parse_functions(file:str)->tuple:  
     try:
         parsFuncTup = ()
-        with open(file,"r") as file:
+        with open(file,"r") as f:
             i =0
-            fileLines = file.readlines()#creates a list to loop through instead of just the file
+            fileLines = f.readlines()#creates a list to loop through instead of just the file
             
             for line in fileLines:
                 tempTup = ()
