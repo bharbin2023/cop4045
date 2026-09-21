@@ -59,9 +59,6 @@ def sortTuple(tup:tuple)->tuple:#returns a alphabetically ordered tuple with sel
 
 #line_number(file1, file2)
 funcTuple = parse_functions("funs.py")
-for tup in funcTuple:
-    print(tup)
-
 funcTuple = sortTuple(funcTuple)
 for tup in funcTuple:
     print(tup)
