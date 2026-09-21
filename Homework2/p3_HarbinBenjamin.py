@@ -1,3 +1,5 @@
+import csv
+
 def add_user(sn, username, fullname):
     friends = []
     if username in sn:
@@ -30,6 +32,19 @@ def get_friends(sn, user1, distance):
         return network
     except KeyError:
         print("User does not exist")
+        raise KeyError
+def save_network(filename, sn):
+    witWh open(filename, "w") as f:
+        for user in sn:
+            userInfo = []
+            userInfo.append(user)
+            userInfo.append(sn[user][0])
+            for friend in sn[user][1]:
+                userInfo.append(friend)
+            userInfo = ",".join(userInfo)
+            f.write(userInfo + "\n")
+
+
 
 sn = {'alice': ('Alice Smith', ['maria']),
       'maria': ('Maria Cortez', ['alice', 'joe', 'david']),
@@ -44,3 +59,4 @@ sn = {'alice': ('Alice Smith', ['maria']),
 print(sn)'''
 
 print(get_friends(sn,"alice", 1))
+save_network("network.csv", sn)
