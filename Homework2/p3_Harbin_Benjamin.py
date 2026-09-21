@@ -1,25 +1,25 @@
-import csv
-
-def add_user(sn, username, fullname):
+def add_user(sn:dict[str, tuple[str, list[str]]], username:str, fullname:str)->bool:
     friends = []
     if username in sn:
         return False
     else:
         sn[username] = (fullname, friends)
         return True
-def add_friend(sn, user1, user2):
+
+def add_friend(sn:dict[str, tuple[str, list[str]]], user1:str, user2:str)->bool:
     if (user1 not in sn) or (user2 not in sn):
         return False
     else:
         sn[user1][1].append(user2)
         sn[user2][1].append(user1)
-def get_friends(sn, user1, distance):
+        return True
+def get_friends(sn:dict[str, tuple[str, list[str]]], user1:str, distance:int)->list[str]:
     try:
         network = []
         level = 0 #keeps track of friend level
         friendList = sn[user1][1]
 
-        while level < distance:
+        while level < distance:#marker for distance
             nextList = []
             for friend in friendList:
                 if friend != user1 and friend not in network:#skips adding the user into the
@@ -33,7 +33,8 @@ def get_friends(sn, user1, distance):
     except KeyError:
         print("User does not exist")
         raise KeyError
-def save_network(filename, sn):
+
+def save_network(filename:str, sn:dict[str, tuple[str, list[str]]]):
     with open(filename, "w") as f:
         for user in sn:
             userInfo = []
@@ -43,7 +44,7 @@ def save_network(filename, sn):
                 userInfo.append(friend)
             userInfo = ",".join(userInfo)
             f.write(userInfo + "\n")
-def load_network(filename):
+def load_network(filename:str):
         sn = {}
         with open(filename, "r") as f:
             for line in f:
@@ -54,7 +55,7 @@ def load_network(filename):
                     add_friend(sn, userInfo[0], friend)#will friend with the other account is created
         return sn
 
-def main():
+def main()->None:
     sn = load_network("network.csv")
     newFull = input("Enter your full name: ")
     newUser = input("Enter your username: ")

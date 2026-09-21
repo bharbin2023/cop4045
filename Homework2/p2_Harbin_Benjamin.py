@@ -43,12 +43,12 @@ def compareLetters(str1:str, str2:str)->bool:
 
 
 #e
-def wordAndLength(wordList:list[str], wordDict: dict[str,int]):
+def wordAndLength(wordList:list[str], wordDict: dict[str,int])->None:
     for word in wordList:
         wordDict[word] = len(word)
 
 #f
-def findVowels(text, vowels, locations):
+def findVowels(text:str, vowels:list[str], locations:dict[int,str])->None:
     i = 0
     while i < len(text):
         if text[i].lower() in vowels:
