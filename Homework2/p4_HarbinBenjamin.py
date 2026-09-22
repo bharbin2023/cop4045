@@ -96,15 +96,19 @@ def getActorsGross(casts:list, topGrossing:list): #returns
                     actorGross[actor] = actorGross.get(actor,0) + gross
                 
         actorList = list(actorGross.items())
-        for i in range(len(actorList)):
-                max = i
-                for j in range(i+1, len(actorList)):
-                    if actorList[j][1] > actorList[max][1]:
-                        max = j
-                temp = actorList[i]
-                actorList[i] = actorList[max]
-                actorList[max] = temp
+        descending(actorList, 1)
+        
         return actorGross
+def descending(unsortedList, Index):
+    sortedList = []
+    for i in range(len(unsortedList)):
+        max = i
+        for j in range(i+1, len(unsortedList)):
+            if unsortedList[j][Index] > unsortedList[max][Index]:
+                max = j
+        sortedList.append(unsortedList[max][Index])
+        unsortedList.pop(max)
+    return sortedList
 
 topMovies = load_imdb_top_rated("imdb-top-rated.csv")
 topGrossingMovies = load_imdb_top_grossing("imdb-top-grossing.csv")
@@ -112,7 +116,5 @@ topCasts = load_imdb_top_casts("imdb-top-casts.csv")
 directorCollabs = (disply_top_collaborations(topCasts, topMovies))
 
 print(directorCollabs)
-for i in top10(directorCollabs):
-    print(i)
 
 print(getActorsGross(topCasts, topGrossingMovies))
