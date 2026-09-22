@@ -50,21 +50,9 @@ def disply_top_collaborations(casts:list,topMovies:list):
                 directors[actor] = directors.get(actor,0) + 1
             collabs[director] = directors
 
-    #sorting the collaborations within the nested dictionary
-    for directors in collabs:
-        actors = list(collabs[director].items())
-        for i in range(len(actors)):
-            max = i
-            for j in range(i+1, len(actors)):
-                if actors[j][1] > actors[max][1]:
-                    max = j
-            temp = actors[i]
-            actors[i] = actors[max]
-            actors[max] = temp
-    collabs[director] = dict(actors)
     return collabs
 
-def top_10(collabs)->tuple:#gets the actors and collaborations with 
+def top10(collabs)->tuple:#gets the actors and collaborations with 
     collaborations = []
     for director in collabs:#putting the directors,actors, and collabs in a tuple
         for actor in collabs[director]:
@@ -81,13 +69,36 @@ def top_10(collabs)->tuple:#gets the actors and collaborations with
         collaborations[max] = temp
     top10 = tuple(collaborations[:10])
     return top10
+def getActorsGross(casts:list, topGrossing:list): #returns
+    actorGross = {}
+    for aMovie in casts:#gettings the movies
+        title = aMovie[0]
+        actors = aMovie[3]
 
+        for movie in topGrossing:# getting the movies from top grossing
+            if title == movie[1]:# only continues if the movie is in the list
+                gross = int(movie[3])
+                for actor in actors:
+                    actorGross[actor] = actorGross.get(actor,0) + gross
+                
+        actorList = list(actorGross.items())
+        for i in range(len(actorList)):
+                max = i
+                for j in range(i+1, len(actorList)):
+                    if actorList[j][1] > actorList[max][1]:
+                        max = j
+                temp = actorList[i]
+                actorList[i] = actorList[max]
+                actorList[max] = temp
+        return actorGross
 
 topMovies = load_imdb_top_rated("imdb-top-rated.csv")
 topGrossingMovies = load_imdb_top_grossing("imdb-top-grossing.csv")
 topCasts = load_imdb_top_casts("imdb-top-casts.csv")
 directorCollabs = (disply_top_collaborations(topCasts, topMovies))
 
-#print(directorCollabs)
-for i in top_10(directorCollabs):
+print(directorCollabs)
+for i in top10(directorCollabs):
     print(i)
+
+print(getActorsGross(topCasts, topGrossingMovies))
