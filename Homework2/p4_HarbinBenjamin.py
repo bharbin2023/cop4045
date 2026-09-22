@@ -62,10 +62,10 @@ def disply_top_collaborations(casts:list,topMovies:list):
             for actor in actors:
                 directors[actor] = directors.get(actor,0) + 1
             collabs[director] = directors
-    collabs = top10Collabs(collabs)
+
     return collabs
 
-def top10Collabs(collabs)->tuple:#gets the actors and collaborations with 
+def top10(collabs)->tuple:#gets the actors and collaborations with 
     collaborations = []
     for director in collabs:#putting the directors,actors, and collabs in a tuple
         for actor in collabs[director]:
@@ -95,26 +95,30 @@ def getActorsGross(casts:list, topGrossing:list): #returns
                 for actor in actors:
                     actorGross[actor] = actorGross.get(actor,0) + gross
                 
-        actorList = list(actorGross.items())
-        descending(actorList, 1)
+    actorList = list(actorGross.items())
+    actorList = descending(actorList, 1)
+    return actorList
         
-        return actorGross
-def descending(unsortedList, Index):
+def descending(unsortedList:list, Index:int):
     sortedList = []
-    for i in range(len(unsortedList)):
-        max = i
-        for j in range(i+1, len(unsortedList)):
+    while len(unsortedList) > 0:
+        max = 0
+        for j in range(1, len(unsortedList)):
             if unsortedList[j][Index] > unsortedList[max][Index]:
                 max = j
-        sortedList.append(unsortedList[max][Index])
+        sortedList.append(unsortedList[max])
         unsortedList.pop(max)
     return sortedList
+
 
 topMovies = load_imdb_top_rated("imdb-top-rated.csv")
 topGrossingMovies = load_imdb_top_grossing("imdb-top-grossing.csv")
 topCasts = load_imdb_top_casts("imdb-top-casts.csv")
 directorCollabs = (disply_top_collaborations(topCasts, topMovies))
 
-print(directorCollabs)
+#print(directorCollabs)
+#for i in top10(directorCollabs):
+ #   print(i)
 
-print(getActorsGross(topCasts, topGrossingMovies))
+for i in getActorsGross(topCasts, topGrossingMovies):
+    print(i)
