@@ -1,33 +1,46 @@
 import csv
 def load_imdb_top_rated(filename:str)->list:#gets top rated movies
-    top_rated = []
-    with open(filename, "r", encoding = "utf-8") as file:
-        reader = csv.reader(file)
-        for row in reader:
-            top_rated.append(row)
-        return top_rated
+    try:
+        top_rated = []
+        with open(filename, "r", encoding = "utf-8") as file:
+            reader = csv.reader(file)
+            for row in reader:
+                top_rated.append(row)
+            return top_rated
+    except FileNotFoundError:
+        print("Could not find a specified file")
+        raise FileNotFoundError
+        
 
 def load_imdb_top_grossing(filename:str)->list:#gets the list of top grossing movies
-    top_gross = []
-    with open(filename, "r", encoding = "utf-8") as file:
-        reader = csv.reader(file)
-        for row in reader:
-            top_gross.append(row)
-        return top_gross
+    try:
+        top_gross = []
+        with open(filename, "r", encoding = "utf-8") as file:
+            reader = csv.reader(file)
+            for row in reader:
+                top_gross.append(row)
+            return top_gross
+    except FileNotFoundError:
+        print("Could not find a specified file")
+        raise FileNotFoundError
 
 def load_imdb_top_casts(filename:str)->list:
-    top_casts = []
-    with open(filename, "r", encoding = "utf-8") as file:
-        reader = csv.reader(file)
-        for row in reader:
-            tempList = []
-            tempList.append(row[0])#title
-            tempList.append(row[1])#year
-            tempList.append(row[2])#director
-            tempList.append(row[3:])#Actors
+    try:
+        top_casts = []
+        with open(filename, "r", encoding = "utf-8") as file:
+            reader = csv.reader(file)
+            for row in reader:
+                tempList = []
+                tempList.append(row[0])#title
+                tempList.append(row[1])#year
+                tempList.append(row[2])#director
+                tempList.append(row[3:])#Actors
 
-            top_casts.append(tempList)
-        return top_casts
+                top_casts.append(tempList)
+            return top_casts
+    except FileNotFoundError:
+        print("Could not find a specified file")
+        raise FileNotFoundError
 
 def movieInTopRated(movie:str, topMovies:list)->bool:#checking a given move is in the top rated movies
     for aMovie in topMovies:
@@ -49,15 +62,16 @@ def disply_top_collaborations(casts:list,topMovies:list):
             for actor in actors:
                 directors[actor] = directors.get(actor,0) + 1
             collabs[director] = directors
-
+    collabs = top10Collabs(collabs)
     return collabs
 
-def top10(collabs)->tuple:#gets the actors and collaborations with 
+def top10Collabs(collabs)->tuple:#gets the actors and collaborations with 
     collaborations = []
     for director in collabs:#putting the directors,actors, and collabs in a tuple
         for actor in collabs[director]:
             count = collabs[director][actor]
             collaborations.append((director, actor, count))
+
     #sorting the tuple by most collabs
     for i in range(len(collaborations)):
         max = i
