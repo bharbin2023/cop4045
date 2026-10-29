@@ -40,15 +40,25 @@ class NVector:
                  self.vector[j] += param[j]
                  j+=1
             return self.vector
-        
-                 
-                 
             
     def __radd__(self, param): 
-            self.vector = [(x + param) for x in self.vector]
-            return self.vector
+            
+            return self.__add__(param)
     
-         
+    def __mul__(self, param):  
+            
+            if type(param) == int:
+                return sum((x * param) for x in self.vector)
+        
+            elif type(param) == NVector:
+                j = 0
+                copy_vector = self.vector
+                while j < len(param):
+                    copy_vector[j] *= param[j]
+                    j+=1
+                return sum(copy_vector)
+    def __rmul__(self, param):
+         return self.__mul__(param)
 
 
 
@@ -57,9 +67,13 @@ n2 = NVector(3,0,-1,1)
 
 print(n1.getVector())
 print(n1.__len__())
-print(n1.__getitem__(-2))
+print(n1 * 2)
+
 n1[2] = 4
-print(n1.getVector())
+
 print(n1)
-print(10 + n2)
-print(n2 + n1)
+print(n2)
+print(n1 * n2)
+
+print(n2 + 10)
+
