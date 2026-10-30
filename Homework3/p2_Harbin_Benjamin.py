@@ -6,6 +6,12 @@ class ParkingPermit:
     
     def cost(self):
         pass
+    
+    def __str__(self):
+        return "Name: {}, Months Purchased: {}, Fee Schedule: {}"
+    
+    def __repr__(self):
+        return "ParkingPermit({},{},{})"
 
 class StudentPermit(ParkingPermit):
     def __init__(self, name, months_purchased, fee_schedule, vehicles_registered):
@@ -13,7 +19,9 @@ class StudentPermit(ParkingPermit):
         self.vehicles_registered = vehicles_registered
 
     def cost(self):
-        return (25.00 * self.months_purchased) + (10.00 * self.vehicles_registered)
+        if self.vehicles_registered  <= 1:
+            return (self.fee_schedule["Student"] * self.months_purchased) 
+        return self.fee_schedule["Student"] * self.months_purchased + self.fee_schedule["Cars"] * self.vehicles_registered
 
 class FacultyPermit(ParkingPermit):
     def __init__(self, name, months_purchased, fee_schedule, garage_access):
@@ -21,4 +29,7 @@ class FacultyPermit(ParkingPermit):
         self.garage_access = garage_access
 
     def cost(self):
-        return (40.00 * self.months_purchased) + (15.00 * self.garage_access)
+        return (self.fee_schedule["Faculty"] * self.months_purchased) + (self.fee_schedule["Garage"] * self.garage_access)
+
+    
+
