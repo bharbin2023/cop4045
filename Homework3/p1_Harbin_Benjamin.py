@@ -23,7 +23,7 @@ class NVector:
         return f"NVector({self.vector})"
 
     def __eq__(self, vector : NVector)->bool:
-        return self.vector == vector.getVector()
+        return self.vector == vector
 
     def __ne__(self, vector : NVector):
         return self.vector != vector.getVector()
@@ -75,10 +75,24 @@ def testif(b, testname, msgOK="", msgFailed=""):
     return b
    
 
-if '__name__' == '__main__':
+if __name__ == '__main__':
     n1 = NVector((3,0,-1,1))
-    n2 = NVector(3,0,-1,1)
+    n2 = NVector(3,0,10,1)
     n1[3] = 10
 
-    testif(n1[3] == 10, "setitem works", "setitem failed")
+    testif(n1[3] == 10, "__setitem__", "setitem works", "setitem failed")
+    testif(n1.__len__() == 4, "len works", "len failed")
+    testif(n1 == n2, "eq works", "eq failed")
+    testif(n1 +10 == [13,10,9,11], "add works", "add failed")
 
+    n1 = NVector(3,0,-1,1)
+    testif((10 +n1) == [13,10,9,11], "radd works", "radd failed")
+
+    n1 = NVector(3,0,-1,1)
+    (testif((n1 * 2) == 6, "mul works", "mul failed"))
+
+    n1 = NVector(3,0,-1,1)
+    (testif(2 * n1 == 10, "rmul works", "rmul failed"))
+    n1 = NVector(3,0,-1,1)
+
+    (testif(n1*n2 == 11, "mul works", "mul failed"))
