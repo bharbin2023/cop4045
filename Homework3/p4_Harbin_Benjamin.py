@@ -1,3 +1,4 @@
+import testif
 def ed_read(filename, From = 0, to = -1):
     try:
         with open(filename, 'r', encoding = "utf-8") as f1:
@@ -47,14 +48,25 @@ def ed_replace(filename, search_str, replace, occurence = -1):
         f1.write(new_content)
     return new_content
     
-         
-
 def ed_append(filename, string):
     with open(filename,"a",encoding = "utf-8") as f1:
         f1.write(string)
     return len(string)
+
+def test_ed_find(filename):
+    lst = ed_find(filename, "345")
+    testif.testif(len(lst),"ed_find test", "ed_find works", "ed_find_failed" )
+
+def test_ed_replace(filename):
+    ed_replace(filename, "345", "ABCDE", occurence = -1)
+    lst = ed_find(filename, "ABCDE")
+    testif.testif(len(lst),"ed_replace test", "ed_replace works", "ed_replace_failed" )
+    
+
+
 def main():
     fn = "file1.txt"
+    
     ed_append(fn, "0123456789")
     ed_append(fn, "0123456789")
     
@@ -70,7 +82,11 @@ def main():
     # assume we reset the file content to 01234567890123456789 (not shown)
     ed_replace(fn, "345", "ABCDE", 3) # changes the file to 012ABCDE6789012ABCDE6789
     
+
+    
     
 
 if __name__ == '__main__':
-    main()
+    test_ed_find("file1.txt")
+    test_ed_replace("file1.txt")
+    #main()
