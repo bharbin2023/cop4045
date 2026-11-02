@@ -43,6 +43,7 @@ class FacultyPermit(ParkingPermit):
 
     def __repr__(self):
         return f"Faculty({self.name}, {self.months_purchased}, {self.fee_schedule})"
+
 def summarize_list(permits : list[ParkingPermit]):
     revenue = 0
     for i in permits:

@@ -19,15 +19,31 @@ def ed_find(filename, search_str):
     return indexes
 
 def ed_replace(filename, search_str, replace, occurence = -1):
-    count = 0
-    content = ed_read(filename)
     lst = ed_find(filename, search_str)
-    if  lst == []:
+    content = ed_read(filename)
+    if len(lst) == 0:
         return content
-    if occurence >= 0:
-        while count <= occurence
-        part1 = content[0:list[0]]
+    
+    if occurence == -1:
+        for i in lst:
+            part1 = content[0:i]
+            part2 = content[i+len(search_str):]
+            new_content = part1 + replace + part2
+        return new_content
+    count = 0
+    while count <= occurence:
+        part1 = content[0:lst[count]]
+        part2 = content[count+len(search_str):]
+        new_content = part1 + replace + part2
+        count += 1
+    return new_content
 
+def ed_append(filename, string):
+    with open(filename,"a", encoding = "utf-8") as f1:
+        f1.write(string)
+    return len(string)
+            
 def main():
     fn = "file1.txt"
+    ed_append(fn, "0123456789")
 
